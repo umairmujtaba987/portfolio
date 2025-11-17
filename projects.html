@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects — Umair Mujtaba</title>
+  <meta name="description" content="Projects by Umair Mujtaba — CRMs, management systems, business websites." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <input id="theme-toggle-checkbox" type="checkbox" aria-label="Toggle theme (CSS only)" hidden>
+
+  <header class="site-header compact">
+    <div>
+      <h1 class="name">Umair Mujtaba</h1>
+      <p class="subtitle">Projects</p>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="projects">
+      <h2 id="proj-title">All Projects</h2>
+      <p>Below are real projects — this list is loaded from <code>projects.json</code>. Add or edit that file to change these cards.</p>
+
+      <div id="projects-grid" class="card-grid"></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Umair Mujtaba</p>
+  </footer>
+
+  <script>
+  async function loadProjects() {
+    try {
+      const res = await fetch('projects.json', { cache: 'no-cache' });
+      const projects = await res.json();
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+      projects.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <p><strong>Tech:</strong> ${p.tech}</p>
+          <p class="proj-links">
+            ${p.link ? `<a class="btn" href="${p.link}" target="_blank" rel="noopener">Live</a>` : ''}
+            ${p.repo ? `<a class="btn" href="${p.repo}" target="_blank" rel="noopener">Repo</a>` : ''}
+          </p>
+        `;
+        grid.appendChild(card);
+      });
+    } catch (err) {
+      document.getElementById('projects-grid').innerHTML = '<p class="muted">Could not load projects.json — make sure the file exists.</p>';
+      console.error(err);
+    }
+  }
+  loadProjects();
+  document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

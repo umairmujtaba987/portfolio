@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Business CRM System",
+    "description": "Custom CRM built with Laravel, permissioned roles, lead pipelines, and email automation.",
+    "tech": "Laravel, MySQL, Bootstrap, DataTables",
+    "link": "",
+    "repo": ""
+  },
+  {
+    "title": "Appointment & Inventory System",
+    "description": "Scheduling, inventory and serialized product tracking, with reporting dashboards.",
+    "tech": "Laravel, Vue, MySQL",
+    "link": "",
+    "repo": ""
+  },
+  {
+    "title": "Corporate Website (Client A)",
+    "description": "Responsive corporate site with CMS & contact workflows.",
+    "tech": "WordPress / Custom PHP",
+    "link": "",
+    "repo": ""
+  }
+]
