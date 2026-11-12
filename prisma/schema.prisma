@@ -1,0 +1,75 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Project {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  subtitle        String
+  category        String
+  role            String
+  featured        Boolean  @default(false)
+  order           Int      @default(0)
+  timeframe       String
+  organization    String?
+  summary         String
+  challenge       String
+  solution        String
+  architecture    String
+  impactMetrics   String   // JSON stringified array of { label, value, subtext }
+  technologies    String   // JSON stringified array of string tags
+  githubUrl       String?
+  liveUrl         String?
+  systemDiagram   String?  // JSON stringified topology data
+  queryBenchmark  String?  // JSON stringified query metrics
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Experience {
+  id           String   @id @default(cuid())
+  company      String
+  role         String
+  location     String
+  period       String
+  isCurrent    Boolean  @default(false)
+  order        Int      @default(0)
+  highlights   String   // JSON stringified array
+  technologies String   // JSON stringified array
+  createdAt    DateTime @default(now())
+}
+
+model SkillCategory {
+  id        String @id @default(cuid())
+  name      String
+  order     Int    @default(0)
+  skills    String // JSON stringified array of { name, proficiency, highlight, level }
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  budget    String?
+  message   String
+  ipAddress String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model QueryBenchmarkRun {
+  id           String   @id @default(cuid())
+  queryType    String
+  unindexedMs  Float
+  indexedMs    Float
+  rowsScanned  Int
+  createdAt    DateTime @default(now())
+}
+
