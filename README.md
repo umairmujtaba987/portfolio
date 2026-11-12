@@ -9,7 +9,7 @@ Built with **Next.js 16 (App Router)**, **TypeScript**, **Three.js WebGL**, **GS
 ## ⚡ Live Demos & Architecture
 
 - **GitHub Repository:** [https://github.com/umairmujtaba987/portfolio](https://github.com/umairmujtaba987/portfolio)
-- **Live Preview:** [https://4435a98346ef39.lhr.life](https://4435a98346ef39.lhr.life)
+- **Live Preview:** [https://portfolio-phi-flame-1tt6j1177z.vercel.app/](https://portfolio-phi-flame-1tt6j1177z.vercel.app/)
 - **Local Dev:** `http://localhost:3000`
 
 ---
