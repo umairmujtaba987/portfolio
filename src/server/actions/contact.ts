@@ -2,6 +2,7 @@
 
 import { contactSchema, ContactFormData } from "@/lib/validations";
 import { prisma } from "@/lib/prisma";
+import { sendContactEmail } from "@/lib/email";
 
 // Sliding window in-memory rate limiter for server action (protects against spam)
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
@@ -65,34 +66,24 @@ export async function submitContactMessage(formData: ContactFormData): Promise<A
       });
     } catch (dbErr) {
       console.error("Database save error:", dbErr);
-      // Even if DB has transient issue, we log it and continue
     }
 
-    // 4. Send Email via Resend if API key is provided
-    const resendApiKey = process.env.RESEND_API_KEY;
-    if (resendApiKey) {
-      try {
-        await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${resendApiKey}`,
-          },
-          body: JSON.stringify({
-            from: "Portfolio Dispatch <onboarding@resend.dev>",
-            to: ["umairmujtaba123@gmail.com"],
-            subject: `[Portfolio Inquiry] from ${name} (${company || "Direct"})`,
-            text: `Name: ${name}\nEmail: ${email}\nCompany: ${company || "N/A"}\nBudget: ${budget || "N/A"}\n\nMessage:\n${message}`,
-          }),
-        });
-      } catch (emailErr) {
-        console.warn("Resend email dispatch warning:", emailErr);
-      }
+    // 4. Send Email via Gmail SMTP / Nodemailer
+    try {
+      await sendContactEmail({
+        name,
+        email,
+        company: company || undefined,
+        budget: budget || undefined,
+        message,
+      });
+    } catch (emailErr) {
+      console.warn("SMTP email dispatch warning:", emailErr);
     }
 
     return {
       success: true,
-      message: "Transmission received. Thank you for reaching out, Umair will respond shortly.",
+      message: "Transmission received. Your message was emailed to Umair and recorded in the database.",
     };
   } catch (error) {
     console.error("Contact action error:", error);
@@ -102,4 +93,3 @@ export async function submitContactMessage(formData: ContactFormData): Promise<A
     };
   }
 }
-
