@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Umair Mujtaba — Principal Systems & Backend Software Engineer Portfolio
 
-## Getting Started
+An Awwwards/FWA-grade personal portfolio website showcasing distributed systems engineering, high-throughput database optimization, and modern creative frontend craft.
 
-First, run the development server:
+Built with **Next.js 16 (App Router)**, **TypeScript**, **Three.js WebGL**, **GSAP + ScrollTrigger**, **Lenis Smooth Scroll**, **Prisma ORM**, and **Tailwind CSS**.
 
+---
+
+## ⚡ Live Demos & Architecture
+
+- **GitHub Repository:** [https://github.com/umairmujtaba987/portfolio](https://github.com/umairmujtaba987/portfolio)
+- **Live Preview:** [https://4435a98346ef39.lhr.life](https://4435a98346ef39.lhr.life)
+- **Local Dev:** `http://localhost:3000`
+
+---
+
+## 🛠️ Key Architectural Highlights
+
+### 1. The Query Profiler (`/components/sections/QueryProfiler.tsx`)
+Interactive database query latency benchmark component simulating real production queries from Umair's work (e.g. **SMC/ZD Tracker** district child immunization rollups and **IDIMS** disease surveillance outbreaks). Visually benchmarks unindexed table scans vs covering indexes and materialized views in real time.
+
+### 2. Interactive WebGL Spatial Node Core (`/components/canvas/HeroNodesCanvas.tsx`)
+GPU-composited Three.js particle mesh with 90 spatial nodes representing distributed backend microservices and database shards. Particles dynamically react to mouse proximity with gravitational damping and connective laser links.
+
+### 3. Interactive CLI Terminal (`/components/ui/TerminalPlayground.tsx`)
+Interactive shell session (`umair@systems:~$`) embedded on the page and accessible globally via `Cmd+K` / `Ctrl+K`.
+Supported commands:
+- `help` — Index of available system commands
+- `projects` — Output flagship case studies and tech stacks
+- `skills` — Categorized competencies and mastery scores
+- `experience` — Career timeline and production roles
+- `cat resume` — View technical resume summary
+- `benchmark` — Trigger simulated query plan evaluation
+- `download` — Download `UmairMujtaba_SE_Resume.pdf`
+- `contact` — Show direct contact links
+
+### 4. Interactive Cluster Topology Sandbox (`/components/sections/ArchitectureSandbox.tsx`)
+Interactive visualization of distributed service topologies: Ingress API Gateway $\rightarrow$ Redis Ephemeral Locks $\rightarrow$ PostgreSQL Primary $\rightarrow$ Cron Workers $\rightarrow$ Analytical Health Dashboard.
+
+### 5. Production Full-Stack Architecture
+- **Prisma ORM (`/prisma/schema.prisma`):** Dynamic schema with seed data matching Umair's actual CV. SQLite for local zero-dependency dev; seamlessly switches to PostgreSQL in production via `DATABASE_URL`.
+- **Type-Safe Server Action (`/server/actions/contact.ts`):** Zod-validated contact form with sliding-window rate limiting to prevent spam, and optional Resend transactional email dispatch.
+- **Synthesized Audio Engine (`/lib/sounds.ts`):** Tactile mechanical click, hover, and success feedback synthesized in real time via the browser Web Audio API with zero audio assets to download.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18.17+ or 20+
+- npm, pnpm, or yarn
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/umairmujtaba987/portfolio.git
+   cd portfolio
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Initialize and Seed the Database:**
+   ```bash
+   npx prisma db push
+   npx tsx prisma/seed.ts
+   ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 📦 Production Build & Deployment
+
+To test the optimized production build:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Deploying to Vercel (Recommended)
+1. Install Vercel CLI:
+   ```bash
+   npm install -g vercel
+   ```
+2. Deploy with:
+   ```bash
+   vercel
+   ```
+3. Set optional environment variables in your Vercel project settings:
+   - `DATABASE_URL` (e.g. Neon Postgres or Supabase connection string)
+   - `RESEND_API_KEY` (for transactional contact form emails)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👤 Author
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Umair Mujtaba**
+- **Role:** Software Engineer — Backend & Distributed Systems Specialist
+- **Location:** Islamabad, Pakistan
+- **LinkedIn:** [linkedin.com/in/umair-mujtaba-425981181](https://linkedin.com/in/umair-mujtaba-425981181)
+- **Email:** [umairmujtaba123@gmail.com](mailto:umairmujtaba123@gmail.com)
