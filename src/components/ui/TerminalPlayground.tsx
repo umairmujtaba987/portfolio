@@ -39,17 +39,20 @@ export function TerminalPlayground({
   ]);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
+    if (isModal && isOpen && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [isOpen]);
+  }, [isModal, isOpen]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [logs]);
+    // Only scroll internal terminal box when user runs commands
+    if (logs.length > 1 && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
+  }, [logs.length]);
 
   const handleCommand = (rawCmd: string) => {
     const cmd = rawCmd.trim();
@@ -255,7 +258,10 @@ export function TerminalPlayground({
       </div>
 
       {/* Terminal Screen Body */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
+      <div
+        ref={scrollContainerRef}
+        className="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed"
+      >
         {logs.map((log, index) => (
           <div key={index} className="space-y-1">
             {log.command && (
@@ -267,7 +273,6 @@ export function TerminalPlayground({
             <div className="text-zinc-300 pl-4">{log.output}</div>
           </div>
         ))}
-        <div ref={bottomRef} />
       </div>
 
       {/* Input Line */}
